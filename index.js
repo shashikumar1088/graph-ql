@@ -12,20 +12,15 @@ import { startStandaloneServer } from '@apollo/server/standalone';
 
 ////Enumeration types
 
-// enum Episode {
-//     NEWHOPE
-//     EMPIRE
-//     JEDI
-//   }
-
+1
 const users = [
-    // {
-    //     id: 15,
-    //     name: "Rohit",
-    //     username: "rohit",
-    //     email: "rohit@dummyid.com",
-    //     website: "",
-    // }
+    {
+        id: 1,
+        name: "Rohit",
+        username: "rohit",
+        email: "rohit@dummyid.com",
+        website: "",
+    }
 ];
 
 const typeDefs = `
@@ -38,6 +33,7 @@ type User {
 }
 type Query{
     getUsers: [User]! 
+    getUser(id:ID!): User 
 }
 
 input UserInput{
@@ -55,6 +51,9 @@ type Mutation{
 const resolvers = {
     Query: {
         getUsers: () => users,
+        getUser: (parent, { id }) => {
+            return users.find((user) => user.id == id);
+        },
     },
     Mutation: {
         addUser: (parent, args) => {

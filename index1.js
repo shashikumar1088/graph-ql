@@ -3,7 +3,7 @@ import axios from 'axios';
 import { startStandaloneServer } from '@apollo/server/standalone';
 
 
-const typeDefs = `#
+const typeDefs = `
 type User {
     id:ID!
     name:String!
@@ -35,7 +35,7 @@ const resolvers = {
         getAllUsers: async (obj, args, context, info) => {
             return (await axios.get("https://jsonplaceholder.typicode.com/users")).data
         },
-        getUser: async (parent, { id }, context) => {
+        getUser: async (parent, { id }) => {
             return (await axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)).data
         },
     }
